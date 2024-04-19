@@ -27,7 +27,7 @@ export default function NewTodoPage() {
 			document.body.style.backgroundColor = userConext.bgColor
 			document.body.style.color = userConext.color
 		}
-	}, [userConext.theme])
+	}, [userConext.theme, userConext.loading])
 
 	// useEffect(() => {
 	// 	document.body.style.backgroundColor = userConext.bgColor

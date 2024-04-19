@@ -7,11 +7,7 @@ export default function UserPage() {
 	const userContext = useContext(UserContext)
 
 	useEffect(() => {
-		if (userContext.loading) {
-			document.body.style.backgroundColor = 'black'
-		} else {
-			document.body.style.backgroundColor = userContext.bgColor
-		}
+		document.body.style.backgroundColor = userContext.bgColor
 	}, [])
 
 	useEffect(() => {
@@ -20,7 +16,7 @@ export default function UserPage() {
 		} else {
 			document.body.style.backgroundColor = userContext.bgColor
 		}
-	}, [userContext.theme])
+	}, [userContext.theme, userContext.loading])
 
 	async function logoutHandler() {
 		userContext.loadingHandler(true)
