@@ -9,15 +9,36 @@ export default function NewTodoPage() {
 	const userConext = useContext(UserContext)
 
 	useEffect(() => {
-		document.body.style.backgroundColor = userConext.bgColor
-		document.body.style.color = userConext.color
-		userConext.showNoteBtnHandler(false)
+		if (userConext.loading) {
+			document.body.style.backgroundColor = 'black'
+			document.body.style.color = userConext.color
+		} else {
+			document.body.style.backgroundColor = userConext.bgColor
+			document.body.style.color = userConext.color
+		}
 	}, [])
 
 	useEffect(() => {
-		document.body.style.backgroundColor = userConext.bgColor
-		document.body.style.color = userConext.color
+		userConext.showNoteBtnHandler(false)
+		if (userConext.loading) {
+			document.body.style.backgroundColor = 'black'
+			document.body.style.color = userConext.color
+		} else {
+			document.body.style.backgroundColor = userConext.bgColor
+			document.body.style.color = userConext.color
+		}
 	}, [userConext.theme])
+
+	// useEffect(() => {
+	// 	document.body.style.backgroundColor = userConext.bgColor
+	// 	document.body.style.color = userConext.color
+	// 	userConext.showNoteBtnHandler(false)
+	// }, [])
+
+	// useEffect(() => {
+	// 	document.body.style.backgroundColor = userConext.bgColor
+	// 	document.body.style.color = userConext.color
+	// }, [userConext.theme])
 
 	async function addNoteHandler(data) {
 		// here we are getting hold of the api of our database to push the new todo data from the form in the database...
