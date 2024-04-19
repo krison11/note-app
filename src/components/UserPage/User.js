@@ -111,14 +111,14 @@ export default function User({ onAddImage, onLogout }) {
 							<Image src={image} alt='Image selected by user.' fill />
 						</div>
 						<Button
-							width='10rem'
+							width='15rem'
 							color='#1baaec'
 							onClick={triggerSubmitHandler}
 						>
 							Add Picture
 						</Button>
 						<Button
-							width='10rem'
+							width='15rem'
 							color='grey'
 							onClick={() => {
 								setImage('')

@@ -79,9 +79,9 @@
 }
 
 .imagecontainer {
-	height: 10rem;
-	width: 10rem;
-	border-radius: 5rem;
+	height: 15rem;
+	width: 15rem;
+	border-radius: 10rem;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
