@@ -1,0 +1,296 @@
+.text-container {
+	color: rgb(40, 40, 40);
+}
+
+.options-closed,
+.options-opened {
+	color: #f5f5f5;
+}
+
+.note-container {
+	background-color: #f5f5f5;
+	transition: all 0.5s ease;
+}
+
+.note-date {
+	text-align: left;
+	font-size: small;
+	opacity: 0.7;
+	margin-top: 0.1rem;
+	font-weight: 400;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+	.note-container {
+		width: 99vw;
+		height: 4rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		overflow: hidden;
+		position: relative;
+		border-radius: 0.3rem;
+		border: solid 1px rgb(161, 161, 161);
+	}
+
+	.text-container {
+		width: 100vw;
+		height: 4rem;
+		padding: 1rem;
+		text-decoration: none;
+		overflow: hidden;
+	}
+	.note-title {
+		font-size: large;
+		font-weight: 400;
+		font-style: italic;
+	}
+
+	.options-opened,
+	.options-closed {
+		width: 25vw;
+		height: 4rem;
+		display: flex;
+		align-items: center;
+		transition: all 0.5s ease-out;
+	}
+
+	.options-closed {
+		position: absolute;
+		margin-left: 100vw;
+	}
+	.options-opened {
+		position: absolute;
+		margin-left: 75vw;
+	}
+
+	.delete {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: larger;
+	}
+
+	.delete {
+		background-color: rgb(255, 0, 68);
+	}
+	.options,
+	.note-text {
+		display: none;
+	}
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 912px) {
+	.note-container {
+		height: 20rem;
+		width: 20rem;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		border-radius: 0.3rem;
+		margin: 1rem;
+		cursor: pointer;
+		overflow: hidden;
+		transition: all 0.5s ease-out;
+		box-shadow: 0px 2px 2px 0px rgb(75, 75, 75);
+	}
+
+	.note-container:hover {
+		box-shadow: 0px 5px 10px 0px rgb(75, 75, 75);
+	}
+
+	.text-container {
+		height: 100%;
+		padding: 1rem;
+		text-decoration: none;
+		overflow: hidden;
+	}
+	.note-title {
+		font-size: x-large;
+		margin-bottom: 1rem;
+	}
+
+	.note-date {
+		display: none;
+	}
+
+	.options-opened,
+	.options-closed {
+		height: 5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transition: all 0.3s ease-out;
+	}
+
+	.options-opened {
+		margin-bottom: 0rem;
+	}
+	.options-closed {
+		margin-bottom: -2.5rem;
+	}
+
+	.options {
+		background-color: #3f7780;
+	}
+	.delete {
+		background-color: rgb(255, 0, 68);
+	}
+
+	.delete,
+	.options {
+		height: 2.5rem;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.note-text {
+		text-align: left;
+	}
+}
+
+/* Medium Desktop */
+@media (min-width: 913px) and (max-width: 1120px) {
+	.note-container {
+		height: 17rem;
+		width: 17rem;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		border-radius: 0.3rem;
+		margin: 1rem;
+		cursor: pointer;
+		overflow: hidden;
+		transition: all 0.5s ease-out;
+		box-shadow: 0px 2px 2px 0px rgb(75, 75, 75);
+	}
+
+	.note-container:hover {
+		box-shadow: 0px 5px 10px 0px rgb(75, 75, 75);
+	}
+
+	.text-container {
+		height: 100%;
+		padding: 1rem;
+		text-decoration: none;
+		overflow: hidden;
+	}
+	.note-title {
+		font-size: x-large;
+		margin-bottom: 1rem;
+	}
+
+	.note-date {
+		display: none;
+	}
+
+	.options-opened,
+	.options-closed {
+		height: 5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transition: all 0.3s ease-out;
+	}
+
+	.options-opened {
+		margin-bottom: 0rem;
+	}
+	.options-closed {
+		margin-bottom: -2.5rem;
+	}
+
+	.options {
+		background-color: #3f7780;
+	}
+	.delete {
+		background-color: rgb(255, 0, 68);
+	}
+
+	.delete,
+	.options {
+		height: 2.5rem;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.note-text {
+		text-align: left;
+	}
+}
+/* Large Desktop */
+@media (min-width: 1121px) {
+	.note-container {
+		height: 20rem;
+		width: 20rem;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		border-radius: 0.3rem;
+		margin: 1rem;
+		cursor: pointer;
+		overflow: hidden;
+		transition: all 0.5s ease-out;
+		box-shadow: 0px 2px 2px 0px rgb(75, 75, 75);
+	}
+
+	.note-container:hover {
+		box-shadow: 0px 5px 10px 0px rgb(75, 75, 75);
+	}
+
+	.text-container {
+		height: 100%;
+		padding: 1rem;
+		text-decoration: none;
+		overflow: hidden;
+	}
+	.note-title {
+		font-size: x-large;
+		margin-bottom: 1rem;
+	}
+
+	.note-date {
+		display: none;
+	}
+
+	.options-opened,
+	.options-closed {
+		height: 5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		transition: all 0.3s ease-out;
+	}
+
+	.options-opened {
+		margin-bottom: 0rem;
+	}
+	.options-closed {
+		margin-bottom: -2.5rem;
+	}
+
+	.options {
+		background-color: #3f7780;
+	}
+	.delete {
+		background-color: rgb(255, 0, 68);
+	}
+
+	.delete,
+	.options {
+		height: 2.5rem;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.note-text {
+		text-align: left;
+	}
+}

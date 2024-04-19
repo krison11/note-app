@@ -1,0 +1,53 @@
+.btn {
+	display: flex;
+	flex-direction: column;
+}
+
+.form {
+	color: black;
+}
+
+.form input {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	border-style: none;
+	font-size: large;
+}
+.form input:focus {
+	outline: none;
+	background-color: rgba(186, 249, 255, 0.426);
+}
+
+.error:focus {
+	outline: 1px solid red !important;
+	background-color: rgba(255, 186, 200, 0.426) !important;
+}
+.outerblocks {
+	/* margin-bottom: 1.5rem; */
+}
+.innerblocks {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.5rem;
+}
+
+.formblocks:last-child {
+	/* margin-top: 5rem; */
+}
+
+.errormessage {
+	text-align: center;
+	color: red;
+	margin-bottom: 1rem;
+}
+
+.linkHolder {
+	width: 100%;
+	text-align: center;
+	font-size: large;
+	margin-top: 1rem;
+}
+
+.linkHolder a {
+	color: rgb(0, 110, 255);
+}

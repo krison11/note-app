@@ -1,0 +1,47 @@
+/* Mobile */
+@media (max-width: 700px) {
+	.container {
+		width: 100vw;
+		height: fit-content;
+		overflow-y: scroll;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 15rem auto;
+	}
+	.not-found {
+		margin-top: -10rem;
+	}
+	.no-notes {
+		margin-top: -7rem;
+	}
+}
+
+/* Desktop */
+@media (min-width: 701px) {
+	.container {
+		width: fit-content;
+		height: fit-content;
+		overflow-y: scroll;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		flex-wrap: wrap;
+		margin: 20rem auto;
+		text-align: center;
+	}
+}
+
+.empty-div {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: larger;
+	z-index: -1;
+}

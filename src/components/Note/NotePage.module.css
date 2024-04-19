@@ -1,0 +1,142 @@
+.container {
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+}
+
+.container textarea {
+	height: 100vh;
+	width: 100vw;
+	resize: none;
+	font-size: large;
+	outline: none;
+	border: none;
+}
+
+@keyframes slide-left {
+	from {
+		opacity: 0;
+		left: 10vw;
+		top: 0;
+	}
+	to {
+		opacity: 1;
+		left: 0vw;
+		top: 0;
+	}
+}
+@keyframes slide-right {
+	from {
+		opacity: 0;
+		left: -10vw;
+		top: 0;
+	}
+	to {
+		opacity: 1;
+		left: 0vw;
+		top: 0;
+	}
+}
+
+.date {
+	width: 100vw;
+	position: absolute;
+	text-align: center;
+	padding: 0.5rem;
+	z-index: 1;
+	transition: all 0.3s ease;
+}
+
+.hide-date {
+	margin-top: 0rem;
+	opacity: 0;
+}
+
+.container button {
+	position: fixed;
+	padding: 0.4rem 1rem 0.4rem 1rem;
+	border: none;
+	cursor: pointer;
+	font-size: medium;
+	border-radius: 1rem;
+	transition: all 0.5s ease;
+	box-shadow: 0px 5px 10px 0px rgb(96, 115, 112);
+	color: rgb(255, 255, 255);
+	z-index: 3;
+}
+
+.container button:hover {
+	box-shadow: 0px 1px 5px 0px rgb(96, 115, 112);
+}
+
+.savebtn {
+	background-color: #ff9100;
+}
+
+.deletebtn {
+	background-color: #fb3862;
+}
+
+.addbtn {
+	background-color: #3ca496;
+}
+
+.container textarea::first-line {
+	font-size: xx-large !important;
+	font-weight: bold !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+	.slide-left,
+	.slide-right {
+		animation: slide-left 0.5s forwards ease-out;
+	}
+	.container textarea {
+		padding: 10rem 1rem 70vh 1rem;
+	}
+
+	.container button {
+		top: 12vh;
+		right: 7vw;
+	}
+
+	.show-date {
+		margin-top: 3.6rem;
+	}
+}
+
+/* ipad /  Desktop */
+@media (min-width: 701px) {
+	.slide-left {
+		animation: slide-left 0.5s forwards ease-out;
+	}
+
+	.slide-right {
+		animation: slide-right 0.5s forwards ease-out;
+	}
+	.show-date {
+		margin-top: 5.5rem;
+	}
+}
+
+/* iPad */
+@media (min-width: 701px) and (max-width: 1024px) {
+	.container textarea {
+		padding: 15rem 5rem 15rem 5rem;
+	}
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+	.container textarea {
+		padding: 15rem;
+	}
+
+	.container button {
+		top: 15vh;
+		right: 20vw;
+	}
+}

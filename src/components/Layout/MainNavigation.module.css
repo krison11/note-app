@@ -1,0 +1,159 @@
+.navigation {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	display: flex;
+	font-size: large;
+	font-weight: lighter;
+	z-index: 2;
+	opacity: 0.95;
+	box-shadow: 0px 0px 15px 0px rgb(127, 135, 134);
+	padding: 1rem;
+}
+
+.linkContainer * {
+	text-decoration: none;
+	list-style: none;
+}
+
+.linkContainer p {
+	margin-right: 0.5rem;
+}
+
+.icons {
+	font-size: 2rem;
+}
+
+.linkContainer a {
+	padding: 0.5rem;
+	border-radius: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: all 1s ease;
+	cursor: pointer;
+}
+
+.imagecontainer {
+	height: 2.3rem;
+	width: 2.3rem;
+	border-radius: 3rem;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.imagecontainer img {
+	object-fit: cover;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+	.navigation {
+		padding: 0.3rem;
+		opacity: 0.9;
+		box-shadow: 0px 0px 15px 0px rgb(127, 135, 134);
+	}
+	.linkContainer {
+		margin: auto;
+		width: 90%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.linkContainer,
+	.linkContainer li {
+		transform: rotateY(180deg);
+	}
+
+	.icons {
+		margin: 0;
+	}
+
+	.mobileNewNoteBtnContainer {
+		width: 100vw;
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		height: 7vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0px 0px 15px 0px rgb(127, 135, 134);
+	}
+
+	.mobileNewNoteBtn {
+		border-radius: 0.5rem;
+		color: #e95900 !important;
+		position: absolute;
+		right: 2.3rem;
+	}
+	.mobileNewNoteBtn svg {
+		font-size: 1.7rem;
+	}
+
+	.notes {
+		font-size: small;
+	}
+	.linkContainer a {
+		border-radius: 0.5rem !important;
+		color: #e95900 !important;
+	}
+	.desktopNewNoteBtn,
+	.linkContainer p,
+	.themebtn {
+		display: none;
+	}
+
+	.usernameParagraph {
+		display: block;
+		margin-left: 0.5rem;
+	}
+}
+
+/* Desktop */
+@media (min-width: 701px) {
+	.mobileNewNoteBtnContainer,
+	.usernameParagraph {
+		display: none;
+	}
+
+	.desktopNewNoteBtn {
+		display: block;
+	}
+	.linkContainer {
+		margin: auto;
+		width: 60vw;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.linkContainer a:hover {
+		/* box-shadow: 0px 1px 1px 0px rgb(93, 101, 100); */
+	}
+	.themebtn {
+		position: fixed;
+		top: 1.5rem;
+		right: 3rem;
+		font-size: xx-large;
+		cursor: pointer;
+		transition: all 0.5s ease;
+		border-radius: 5rem;
+	}
+
+	.themebtn:hover {
+		transform: scale(1.1);
+		box-shadow: 0px 5px 10px 0px rgb(131, 142, 140);
+	}
+	.linkContainer a:hover {
+		box-shadow: 0px 5px 10px 0px rgb(128, 135, 135) !important;
+	}
+	.active {
+		box-shadow: 0px 5px 10px 0px rgb(128, 135, 135) !important;
+	}
+}

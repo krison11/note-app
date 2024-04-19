@@ -1,0 +1,19 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+
+.innerblock {
+	text-align: center;
+}
+
+.innerblock h1 {
+	margin-bottom: 2rem;
+}

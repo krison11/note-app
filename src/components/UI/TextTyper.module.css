@@ -1,0 +1,31 @@
+.cursor-wrapper {
+	display: inline-block;
+	height: 17px;
+	width: 10px;
+}
+.cursor,
+.animate {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #68e8fc;
+	color: transparent;
+}
+
+.animate {
+	animation: onoff 1s infinite;
+}
+
+@keyframes onoff {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 100;
+	}
+	100% {
+		opacity: 0;
+	}
+}
