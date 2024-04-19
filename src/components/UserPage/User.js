@@ -105,7 +105,7 @@ export default function User({ onAddImage, onLogout }) {
 	return (
 		<>
 			{image && (
-				<Modal title={''}>
+				<Modal>
 					<div className={classes.imagepreview}>
 						<div className={classes.imagecontainer}>
 							<Image src={image} alt='Image selected by user.' fill />
@@ -143,7 +143,7 @@ export default function User({ onAddImage, onLogout }) {
 							<input
 								ref={fileInputRef}
 								type='file'
-								// accept='image/jpeg, image/png, image/jpg'
+								accept='image/jpeg, image/png, image/jpg'
 								name='image'
 								onChange={onChangeHandler}
 								required
