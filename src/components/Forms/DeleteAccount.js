@@ -26,7 +26,6 @@ export default function DeleteAccount({ onDeleteUser }) {
 			deleteRef.current.focus()
 		} else {
 			userContext.formInputIsValidHandler(null)
-			// here i have to delete the user from the database
 			onDeleteUser()
 		}
 	}

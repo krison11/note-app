@@ -23,9 +23,7 @@ export default function RegisterForm(props) {
 
 	useEffect(() => {
 		userNameRef.current.focus()
-		if (router.pathname === '/register') {
-			userConext.formInputIsValidHandler(true)
-		}
+		userConext.formInputIsValidHandler(true)
 	}, [])
 
 	useEffect(() => {

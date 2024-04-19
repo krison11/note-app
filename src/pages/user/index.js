@@ -7,8 +7,12 @@ export default function UserPage() {
 	const userContext = useContext(UserContext)
 
 	useEffect(() => {
-		userContext.showNoteBtnHandler(true)
+		document.body.style.backgroundColor = userContext.bgColor
 	}, [])
+
+	useEffect(() => {
+		document.body.style.backgroundColor = userContext.bgColor
+	}, [userContext.theme])
 
 	async function logoutHandler() {
 		userContext.loadingHandler(true)
@@ -46,14 +50,6 @@ export default function UserPage() {
 			})
 			.catch(error => console.error(error))
 	}
-
-	useEffect(() => {
-		document.body.style.backgroundColor = userContext.bgColor
-	}, [])
-
-	useEffect(() => {
-		document.body.style.backgroundColor = userContext.bgColor
-	}, [userContext.theme])
 
 	return (
 		<>

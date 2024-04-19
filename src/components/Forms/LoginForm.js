@@ -18,9 +18,7 @@ export default function LoginForm(props) {
 
 	useEffect(() => {
 		emailRef.current.focus()
-		if (router.pathname === '/login') {
-			userConext.formInputIsValidHandler(true)
-		}
+		userConext.formInputIsValidHandler(true)
 	}, [])
 
 	useEffect(() => {

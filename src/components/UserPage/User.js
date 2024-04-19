@@ -49,6 +49,7 @@ export default function User({ onAddImage, onLogout }) {
 
 	function onChangeHandler(e) {
 		const loadedFile = e.target.files[0]
+		userContext.formInputIsValidHandler(true)
 
 		if (!loadedFile) {
 			setImage(null)
@@ -104,7 +105,7 @@ export default function User({ onAddImage, onLogout }) {
 	return (
 		<>
 			{image && (
-				<Modal>
+				<Modal title={''}>
 					<div className={classes.imagepreview}>
 						<div className={classes.imagecontainer}>
 							<Image src={image} alt='Image selected by user.' fill />
@@ -142,7 +143,7 @@ export default function User({ onAddImage, onLogout }) {
 							<input
 								ref={fileInputRef}
 								type='file'
-								accept='image/jpeg, image/png, image/jpg'
+								// accept='image/jpeg, image/png, image/jpg'
 								name='image'
 								onChange={onChangeHandler}
 								required

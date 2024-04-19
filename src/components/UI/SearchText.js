@@ -11,13 +11,15 @@ export default function SearchText({ onGetInput, showBar }) {
 
 	useEffect(() => {
 		if (userContext.notes.length > 1) {
-			if (userContext.notes.length === 2) {
+			if (userContext.notes.length === 2 && !userContext.aimationFinished) {
 				animate('search-bar').show('0.7s ease-out', '1s')
+				userContext.animationFinishedHandler(true)
 			} else {
 				animate('search-bar').show('0s', '0s')
 			}
 		} else {
 			animate('search-bar').hide('0.3s ease-out', '0s')
+			userContext.animationFinishedHandler(false)
 		}
 	}, [userContext.notes])
 
