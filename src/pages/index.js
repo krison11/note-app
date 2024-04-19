@@ -103,7 +103,7 @@ export default function Home() {
 		if (userContext.notes.length > 1) {
 			e.target.scrollTop < 50 &&
 				animate('search-bar').show('0.7s ease-out', '0s')
-			e.target.scrollTop > 100 && animate('search-bar').hide('0.5s ease', '0s')
+			e.target.scrollTop > 50 && animate('search-bar').hide('0.5s ease', '0s')
 		}
 	}
 
