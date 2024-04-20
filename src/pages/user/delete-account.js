@@ -17,16 +17,16 @@ export default function DeleteAccountPage() {
 
 	useEffect(() => {
 		document.body.style.backgroundColor = 'black'
-	}, [userContext.theme])
+	}, [userContext.user])
 
 	// delte from the home page
 	async function deleteUserHandler() {
 		userContext.loadingHandler(true)
-		const userId = sessionStorage.getItem('userId')
+		const user = JSON.parse(sessionStorage.getItem('user'))
 		await fetch('../api/app-database', {
 			method: 'POST',
 			body: JSON.stringify({
-				userId,
+				userId: user._id,
 				from: 'delete-user',
 			}),
 			headers: {

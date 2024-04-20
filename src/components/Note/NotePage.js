@@ -10,7 +10,7 @@ export default function NotePage({ onSendData, currentNote }) {
 	const [note, setNote] = useState('')
 	const [classname, setClassname] = useState('slide-left')
 	const [showDate, setSHowDate] = useState(true)
-	const [showBtn, setSHowBtn] = useState(false)
+	const [showBtn, setSHowBtn] = useState(true)
 
 	const dateClassName = showDate ? 'show-date' : 'hide-date'
 	const date = new Date().toDateString()
@@ -18,18 +18,23 @@ export default function NotePage({ onSendData, currentNote }) {
 	// slide page left or right and setting note value conditionally..
 	useEffect(() => {
 		const prevPath = sessionStorage.getItem('prevPath')
+		const storedNote = sessionStorage.getItem('note')
+		storedNote && setNote(storedNote)
 
 		if (router.pathname === '/new-note') {
 			noteRef.current.focus()
 
 			if (prevPath !== '/new-note') {
-				console.log('prev path: ', prevPath)
 				prevPath === '/user'
 					? setClassname('slide-right')
 					: setClassname('slide-left')
 			}
 		} else {
-			currentNote && setNote(currentNote.title + '\n' + currentNote.text)
+			if (currentNote) {
+				setSHowBtn(false)
+				const note = currentNote.title + '\n' + currentNote.text
+				setNote(note)
+			}
 			setClassname('slide-right')
 		}
 		sessionStorage.setItem('prevPath', router.pathname)
@@ -40,6 +45,7 @@ export default function NotePage({ onSendData, currentNote }) {
 	function onChangeHandler(e) {
 		setNote(e.target.value)
 		setSHowBtn(true)
+		sessionStorage.setItem('note', e.target.value)
 	}
 
 	function submitHandler(e) {
@@ -59,22 +65,9 @@ export default function NotePage({ onSendData, currentNote }) {
 			}
 		}
 		if (e.target.name === 'delete') {
-			data = {
-				note: {
-					id: currentNote.id,
-				},
-				from: 'delete-note',
-			}
 			sessionStorage.setItem('noteId', currentNote.id)
 			router.push('/')
-			const timmer = setTimeout(() => {
-				console.log('executing...')
-				sessionStorage.removeItem('noteId')
-				onSendData(data)
-			}, 2000)
-			return () => {
-				clearTimeout(timmer)
-			}
+			return
 		}
 		if (e.target.name === 'save') {
 			const splitedNote = note.split('\n')
@@ -91,6 +84,8 @@ export default function NotePage({ onSendData, currentNote }) {
 			}
 		}
 		onSendData(data)
+		setNote('')
+		sessionStorage.removeItem('note')
 	}
 
 	let button
@@ -139,7 +134,7 @@ export default function NotePage({ onSendData, currentNote }) {
 				value={note}
 				onScroll={e => {
 					e.target.scrollTop < 50 && setSHowDate(true)
-					e.target.scrollTop > 100 && setSHowDate(false)
+					e.target.scrollTop > 50 && setSHowDate(false)
 				}}
 			/>
 		</div>

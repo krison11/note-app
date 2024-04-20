@@ -14,13 +14,7 @@ export default async function handler(req, res) {
 	)
 	const db = client.db()
 	const database = db.collection('users')
-
 	const existingUsers = await database.find().toArray()
-
-	// user by id will be provided to all below...
-	const user = await database.findOne({
-		_id: new ObjectId(requestData.userId),
-	})
 
 	console.log(`data from ${requestData.from}: `, requestData)
 
@@ -88,65 +82,25 @@ export default async function handler(req, res) {
 					newPassword: user.password,
 				})
 			}
-			if (requestData.from === 'change-theme') {
-				await database.updateOne(
-					{ _id: new ObjectId(requestData.userId) },
-					{ $set: { theme: requestData.newTheme } }
-				)
+			if (requestData.from === 'logout') {
+				await database
+					.deleteOne({ _id: new ObjectId(requestData.user._id) })
+					.then()
+
+				delete requestData.user._id
+				await database.insertOne(requestData.user)
 
 				res.status(201).json({
-					message: 'theme has changed succcessfully...',
-					newTheme: requestData.newTheme,
+					message: 'user updates have been stored succcessfully...',
 				})
-			}
-			if (requestData.from === 'save-note') {
-				const filteredNotes = user.notes.filter(
-					note => note.id !== requestData.note.id
-				)
-				const newArr = [requestData.note, ...filteredNotes]
-
-				await database.updateOne(
-					{ _id: new ObjectId(requestData.userId) },
-					{ $set: { notes: [...newArr] } }
-				)
-
-				res.status(201).json({ message: 'note is updated...', notes: newArr })
-			}
-			if (requestData.from === 'delete-note') {
-				// id
-				const filteredNotes = user.notes.filter(
-					note => note.id !== requestData.note.id
-				)
-
-				await database.updateOne(
-					{ _id: new ObjectId(requestData.userId) },
-					{ $set: { notes: [...filteredNotes] } }
-				)
-
-				res
-					.status(201)
-					.json({ message: 'note is deleted...', notes: filteredNotes })
 			}
 			if (requestData.from === 'delete-user') {
 				await database.deleteOne({ _id: new ObjectId(requestData.userId) })
 				res.status(201).json({ message: 'user is deleted...' })
 			}
-			if (requestData.from === 'add-note') {
-				await database.updateOne(
-					{ _id: new ObjectId(requestData.userId) },
-					{ $set: { notes: [requestData.note, ...user.notes] } }
-				)
-				const newArr = [requestData.note, ...user.notes]
-				res.status(201).json({ message: 'new todo added....', notes: newArr })
-			}
-			if (requestData.from === 'get-notes') {
-				user && res.status(201).json({ notes: user.notes })
-			}
-
-			if (requestData.from === 'get-user-image') {
-				console.log('image: ', requestData.userImage)
-				// console.log('id: ', requestData.userId)
-			}
+			// if (requestData.from === 'get-user-image') {
+			// 	console.log('image: ', requestData.userImage)
+			// }
 		}
 	}
 	client.close()

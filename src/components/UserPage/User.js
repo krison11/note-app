@@ -17,7 +17,7 @@ export default function User({ onAddImage, onLogout }) {
 	const [password, setPassword] = useState('')
 	const [show, setShow] = useState(false)
 	const [image, setImage] = useState()
-	const [file, setFile] = useState({})
+	const [file, setFile] = useState()
 	const [picMessage, setPicMessage] = useState('')
 
 	useEffect(() => {
@@ -25,23 +25,27 @@ export default function User({ onAddImage, onLogout }) {
 	}, [])
 
 	useEffect(() => {
-		const img = sessionStorage.getItem('image')
-		img
-			? setPicMessage('Change profile picture:')
-			: setPicMessage('Add profile picture:')
+		const user = JSON.parse(sessionStorage.getItem('user'))
+
+		if (user) {
+			user.image
+				? setPicMessage('Change profile picture:')
+				: setPicMessage('Add profile picture:')
+		}
 	}, [image])
 
 	useEffect(() => {
-		const storeEmail = sessionStorage.getItem('email')
-		const storePassword = sessionStorage.getItem('password')
-		if (storeEmail && storePassword) {
-			const hiddenPass = storePassword.split('').map(char => {
-				return char.replace(char, '*')
-			})
-			setEmail(storeEmail)
-			show ? setPassword(storePassword) : setPassword(hiddenPass)
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		if (user) {
+			if (user.email && user.password) {
+				const hiddenPass = user.password.split('').map(char => {
+					return char.replace(char, '*')
+				})
+				setEmail(user.email)
+				show ? setPassword(user.password) : setPassword(hiddenPass)
+			}
 		}
-	}, [show, userContext.password])
+	}, [show, userContext.user])
 
 	function fileImageHandler() {
 		fileInputRef.current.click()
@@ -60,14 +64,17 @@ export default function User({ onAddImage, onLogout }) {
 		const dataUrlReader = new FileReader()
 		dataUrlReader.onload = () => {
 			setImage(dataUrlReader.result)
+			console.log('loaded file: ', dataUrlReader.result)
 		}
 		dataUrlReader.readAsDataURL(loadedFile)
 
+		console.log('loaded file: ', loadedFile)
+
+		const user = JSON.parse(sessionStorage.getItem('user'))
 		// setting formData()...
-		const userId = sessionStorage.getItem('userId')
 		const formData = new FormData()
 		formData.append('file', loadedFile)
-		formData.append('userId', userId)
+		formData.append('userId', user._id)
 		setFile(formData)
 	}
 
@@ -155,7 +162,7 @@ export default function User({ onAddImage, onLogout }) {
 						</span>
 					</div>
 					<div className={classes.theme}>
-						Theme: {userContext.theme}
+						Theme: {userContext.user.theme}
 						<FaAdjust
 							style={{ color: userContext.color }}
 							className={classes.themeicon}

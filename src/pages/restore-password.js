@@ -16,7 +16,7 @@ export default function restorePassword() {
 
 	useEffect(() => {
 		document.body.style.backgroundColor = 'black'
-	}, [userContext.theme])
+	}, [userContext.user.theme])
 
 	function sendEmailHandler(email) {
 		console.log('sending email to ', email, '....')

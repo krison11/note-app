@@ -49,12 +49,9 @@ export default async function handler(req, res) {
 
 	form.parse(req, (err, fields, files) => {
 		if (err) reject(err)
-		// console.log('user id: ', fields.userId[0])
-		// console.log('new file name: ', files.file[0].newFilename)
-		// console.log('file path: ', files.file[0].filepath)
-		// console.log('file: ', files.file[0])
-		// console.log('data: ', req.formdata())
-		// console.log('files: ', files.file[0])
+		console.log('user id: ', fields.userId[0])
+		console.log('new file name: ', files.file[0].newFilename)
+		console.log('file path: ', files.file[0].filepath)
 
 		database.updateOne(
 			{ _id: new ObjectId(fields.userId[0]) },
@@ -62,19 +59,18 @@ export default async function handler(req, res) {
 		)
 
 		res.status(201).json({
-			// message: 'image added succcessfully...',
-			file: files.file[0],
+			message: 'image added succcessfully...',
 			fileName: files.file[0].newFilename,
 			filePath: files.file[0].filepath,
-			userId: fields.userId[0],
 		})
 	})
 
-	res.status(201).json({
-		message: 'image added succcessfully...',
-		// file: files.file[0],
-		// fileName: files.file[0].newFilename,
-		// filePath: files.file[0].filepath,
-		// userId: fields.userId[0],
-	})
+	// res.status(201).json({
+	// 	message: 'image added succcessfully...',
+	// 	file: files.file[0],
+	// 	fileName: files.file[0].newFilename,
+	// 	filePath: files.file[0].filepath,
+	// 	userId: fields.userId[0],
+	// })
+	client.close()
 }

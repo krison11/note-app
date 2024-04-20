@@ -10,18 +10,21 @@ export default function SearchText({ onGetInput, showBar }) {
 	const [input, setInput] = useState('')
 
 	useEffect(() => {
-		if (userContext.notes.length > 1) {
-			if (userContext.notes.length === 2 && !userContext.aimationFinished) {
+		if (userContext.user.notes.length > 1) {
+			if (
+				userContext.user.notes.length === 2 &&
+				!userContext.aimationFinished
+			) {
 				animate('search-bar').show('0.7s ease-out', '1s')
 				userContext.animationFinishedHandler(true)
 			} else {
 				animate('search-bar').show('0s', '0s')
 			}
 		} else {
-			animate('search-bar').hide('0.3s ease-out', '0s')
+			animate('search-bar').hide('0.3s ease-out', '0.5s')
 			userContext.animationFinishedHandler(false)
 		}
-	}, [userContext.notes])
+	}, [userContext.user])
 
 	useEffect(() => {
 		if (userContext.clearSearch) {

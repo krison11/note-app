@@ -9,10 +9,6 @@ export default function Note(props) {
 	const [touchEnd, setTouchEnd] = useState(null)
 	const [showOptions, setShowOptions] = useState(false)
 
-	useEffect(() => {
-		console.log('props.date: ', props.date)
-	}, [])
-
 	const optionContainerClass = showOptions ? 'options-opened' : 'options-closed'
 	// the required distance between touchStart and touchEnd to be detected as a swipe
 	const minSwipeDistance = 50

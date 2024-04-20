@@ -120,6 +120,11 @@
 	.show-date {
 		margin-top: 5.5rem;
 	}
+
+	.container button {
+		top: 15vh;
+		right: 20vw;
+	}
 }
 
 /* iPad */
@@ -133,10 +138,5 @@
 @media (min-width: 1025px) {
 	.container textarea {
 		padding: 15rem;
-	}
-
-	.container button {
-		top: 15vh;
-		right: 20vw;
 	}
 }

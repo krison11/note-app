@@ -31,7 +31,7 @@ export default function ChangePassword(props) {
 	}
 
 	function submitHandler(e) {
-		const originalPassword = sessionStorage.getItem('password')
+		const user = JSON.parse(sessionStorage.getItem('user'))
 		e.preventDefault()
 		setErrorClass('error')
 		if (oldPassword === '') {
@@ -39,7 +39,7 @@ export default function ChangePassword(props) {
 			oldPasswordRef.current.focus()
 			setErrorClass('error')
 			setErrorMessage('Please add your old password!')
-		} else if (oldPassword !== originalPassword) {
+		} else if (oldPassword !== user.password) {
 			userContext.formInputIsValidHandler(false)
 			oldPasswordRef.current.focus()
 			setErrorClass('error')

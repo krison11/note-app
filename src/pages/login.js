@@ -14,12 +14,10 @@ export default function login() {
 
 	useEffect(() => {
 		document.body.style.backgroundColor = 'black'
-		const userId = sessionStorage.getItem('userId')
-		userContext.userIdHandler(userId)
 		if (!userContext.aimationFinished) {
 			const timmer = setTimeout(() => {
 				userContext.animationFinishedHandler(true)
-				sessionStorage.setItem('show-modal', true)
+				// sessionStorage.setItem('show-modal', true)
 			}, 4500)
 
 			return () => {
@@ -30,7 +28,7 @@ export default function login() {
 
 	// login...
 	async function loginHandler(formData) {
-		userContext.sendDataHandler(formData)
+		userContext.loginHandler(formData)
 	}
 
 	return (

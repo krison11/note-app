@@ -21,12 +21,12 @@ export default function ChangePasswordPage() {
 
 	async function changePasswordHandler(newPassword) {
 		userCtx.loadingHandler(true)
-		const userId = sessionStorage.getItem('userId')
+		const user = JSON.parse(sessionStorage.getItem('user'))
 		await fetch('../api/app-database', {
 			method: 'POST',
 			body: JSON.stringify({
 				newPassword,
-				userId,
+				userId: user._id,
 				from: 'change-password',
 			}),
 			headers: {
@@ -37,8 +37,9 @@ export default function ChangePasswordPage() {
 			.then(res => {
 				userCtx.loadingHandler(false)
 				setShow(true)
-				userCtx.passwordHandler(res.newPassword)
-				sessionStorage.setItem('password', res.newPassword)
+				user.password = res.newPassword
+				userCtx.userHandler(user)
+				sessionStorage.setItem('user', JSON.stringify(user))
 				const timer = setTimeout(() => {
 					router.push('/user')
 				}, 2000)
@@ -55,7 +56,7 @@ export default function ChangePasswordPage() {
 				<meta name='description' content={'Change password page'} />
 			</Head>
 			{show ? (
-				<MessageCard title={'✅'} text={'You have changed you password.'} />
+				<MessageCard title={'✅'} text={'You have changed your password.'} />
 			) : (
 				<Modal title={'Change Password'}>
 					<ChangePassword onChangePassword={changePasswordHandler} />

@@ -15,30 +15,30 @@ export default function MainNavigation() {
 	const [userName, setUserName] = useState('')
 	const [image, setImage] = useState('')
 
-	const notes = userContext.notes.length > 1 ? 'Notes' : 'Note'
+	const notes = userContext.user.notes.length > 1 ? 'Notes' : 'Note'
 
 	// import image
-	// async function getImage() {
-	// 	const userImage = sessionStorage.getItem('image')
-	// 	const imagePath = userImage
-	// 		? await import(`/src/pages/api/images/${userImage}`)
-	// 		: ''
-	// 	console.log('imagePath: ', imagePath)
-	// 	setImage(imagePath)
-	// }
+	async function getImage() {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		const imagePath = user.image
+			? await import(`/src/pages/api/images/${user.image}`)
+			: ''
+		console.log('imagePath: ', imagePath)
+		setImage(imagePath)
+	}
 
 	useEffect(() => {
-		const name = sessionStorage.getItem('username')
-		setUserName(name)
-		const userImage = sessionStorage.getItem('image')
-		setImage(userImage)
-		// getImage()
-	}, [userContext.userId])
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		user && setUserName(user.username)
+		// const userImage = sessionStorage.getItem('image')
+		// setImage(userImage)
+		getImage()
+	}, [userContext.user])
 
 	useEffect(() => {
-		const userImage = sessionStorage.getItem('image')
-		setImage(userImage)
-		// getImage()
+		// const userImage = sessionStorage.getItem('image')
+		// setImage(userImage)
+		getImage()
 	}, [userContext.image])
 
 	function toggleTheme() {
@@ -50,7 +50,7 @@ export default function MainNavigation() {
 
 	useEffect(() => {
 		document.body.style.backgroundColor = userContext.bgColor
-	}, [userContext.theme])
+	}, [userContext.user.theme])
 
 	return (
 		<header>
@@ -98,11 +98,13 @@ export default function MainNavigation() {
 				{userContext.showNoteBtn && (
 					<div
 						className={classes.mobileNewNoteBtnContainer}
-						style={{ backgroundColor: userContext.bgColor }}
+						style={{
+							backgroundColor: userContext.bgColor,
+						}}
 					>
-						{userContext.notes.length > 0 && (
+						{userContext.user.notes.length > 0 && (
 							<div className={classes.notes}>
-								{userContext.notes.length} {notes}
+								{userContext.user.notes.length} {notes}
 							</div>
 						)}
 						<Link className={classes.mobileNewNoteBtn} href='/new-note'>

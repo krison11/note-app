@@ -17,7 +17,7 @@ export default function login() {
 
 	// register ...
 	async function registerHandler(formData) {
-		userContext.sendDataHandler(formData)
+		userContext.loginHandler(formData)
 	}
 
 	return (

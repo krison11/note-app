@@ -11,19 +11,18 @@ export default function Home() {
 	const [searching, setSearching] = useState(false)
 	const [classname, setClassname] = useState('slide-left')
 	const [filterdNotes, setFilteredNotes] = useState([])
-	const notes = searching ? filterdNotes : userContext.notes
+	const notes = searching ? filterdNotes : userContext.user.notes
 
 	useEffect(() => {
 		document.body.style.backgroundColor = userContext.bgColor
 		document.body.style.color = userContext.color
-	}, [userContext.theme])
+	}, [userContext.user])
 
 	useEffect(() => {
 		document.body.style.backgroundColor = userContext.bgColor
 		document.body.style.color = userContext.color
 		userContext.showNoteBtnHandler(true)
 		const prevPath = sessionStorage.getItem('prevPath')
-		console.log('prev path: ', prevPath)
 
 		if (prevPath === '/user') {
 			setClassname('slide-right')
@@ -32,62 +31,37 @@ export default function Home() {
 			setClassname('slide-left')
 		}
 		sessionStorage.setItem('prevPath', window.location.pathname)
-
 		const id = sessionStorage.getItem('noteId')
 		if (id) {
+			console.log('id: ', id)
 			animate(id).shrink('1s')
+			setTimeout(() => {
+				deleteNoteHandler(id)
+				sessionStorage.removeItem('noteId')
+			}, 1500)
 		}
 	}, [])
 
 	// get notes..
 	useEffect(() => {
-		const userId = sessionStorage.getItem('userId')
-		fetch('./api/app-database', {
-			method: 'POST',
-			body: JSON.stringify({
-				userId,
-				from: 'get-notes',
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		})
-			.then(res => res.json())
-			.then(res => {
-				setSearching(false)
-				userContext.notesHandler(res.notes)
-				// console.log(res.notes)
-			})
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		if (user) {
+			userContext.userHandler(user)
+		}
 	}, [])
 
 	// delete from the home page
-	async function deleteNoteHandler(noteId) {
-		console.log('id: ', noteId)
-		const userId = sessionStorage.getItem('userId')
-		// userContext.loadingHandler(true)
-		await fetch('./api/app-database', {
-			method: 'POST',
-			body: JSON.stringify({
-				note: { id: noteId },
-				from: 'delete-note',
-				userId,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		})
-			.then(res => res.json())
-			.then(res => {
-				// userContext.loadingHandler(false)
-				userContext.notesHandler(res.notes)
-				userContext.clearSearchHandler(true)
-				setSearching(false)
-			})
+	function deleteNoteHandler(noteId) {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		const filterdNotes = user.notes.filter(note => note.id !== noteId)
+		userContext.userHandler(user)
+		user.notes = [...filterdNotes]
+		sessionStorage.setItem('user', JSON.stringify(user))
 	}
 
 	// filter notes...
 	function getInputHandler(input) {
-		const filNotes = userContext.notes.filter(note => {
+		const filNotes = userContext.user.notes.filter(note => {
 			if (
 				note.title.toLowerCase().includes(input.toLowerCase()) ||
 				note.text.toLowerCase().includes(input.toLowerCase())
@@ -100,7 +74,7 @@ export default function Home() {
 	}
 
 	function barBehaviourHandler(e) {
-		if (userContext.notes.length > 1) {
+		if (userContext.user.notes.length > 1) {
 			e.target.scrollTop < 50 &&
 				animate('search-bar').show('0.7s ease-out', '0s')
 			e.target.scrollTop > 50 && animate('search-bar').hide('0.5s ease', '0s')

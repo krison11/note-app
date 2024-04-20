@@ -16,17 +16,17 @@ export default function UserPage() {
 		} else {
 			document.body.style.backgroundColor = userContext.bgColor
 		}
-	}, [userContext.theme, userContext.loading])
+	}, [userContext.user, userContext.loading])
 
 	async function logoutHandler() {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		console.log('user before: ', user)
 		userContext.loadingHandler(true)
-		const userId = sessionStorage.getItem('userId')
 		await fetch('../api/app-database', {
 			method: 'POST',
 			body: JSON.stringify({
-				newTheme: userContext.theme,
-				userId,
-				from: 'change-theme',
+				user,
+				from: 'logout',
 			}),
 			headers: {
 				'Content-Type': 'application/json',
@@ -40,17 +40,26 @@ export default function UserPage() {
 	}
 
 	async function addImageHandler(data) {
+		console.log('data before: ', data)
 		await fetch('../api/upload-image', {
 			method: 'POST',
 			body: data,
 		})
 			.then(res => res.json())
 			.then(res => {
-				console.log('message: ', res.message)
+				console.log('image response: ', res)
+				// console.log('image file: ', res.file)
+				// console.log('image path: ', res.filePath)
+				// console.log('image name: ', res.fileName)
+				const user = JSON.parse(sessionStorage.getItem('user'))
+				user.image = res.fileName
+				sessionStorage.setItem('user', JSON.stringify(user))
+				// console.log('message: ', res.message)
 				// console.log('fileName: ', res.fileName)
 				// console.log('filePath: ', res.filePath)
 				// sessionStorage.setItem('image', data)
 				// userContext.imageHandler(data)
+				// userContext.imageHandler(res.filepath)
 			})
 			.catch(error => console.error(error))
 	}
