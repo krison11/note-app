@@ -34,26 +34,13 @@ export default function MainNavigation() {
 		// const userImage = sessionStorage.getItem('image')
 		// setImage(userImage)
 		// getImage()
-		const timmer = setTimeout(() => {
-			getImage()
-		}, 2000)
-
-		return () => {
-			clearTimeout(timmer)
-		}
+		// getImage()
 	}, [userContext.user])
 
-	// useEffect(() => {
-	// const userImage = sessionStorage.getItem('image')
-	// setImage(userImage)
-	// const timmer = setTimeout(() => {
-	// 	getImage()
-	// }, 2000)
-
-	// return () => {
-	// 	clearTimeout(timmer)
-	// }
-	// }, [userContext.user])
+	// get image....
+	useEffect(() => {
+		getImage()
+	}, [userContext.user.image])
 
 	function toggleTheme() {
 		userContext.toggleTheme()

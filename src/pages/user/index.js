@@ -50,8 +50,13 @@ export default function UserPage() {
 				console.log('image response: ', res)
 				const user = JSON.parse(sessionStorage.getItem('user'))
 				user.image = res.fileName
-				userContext.userHandler(user)
 				sessionStorage.setItem('user', JSON.stringify(user))
+				const timmer = setTimeout(() => {
+					userContext.userHandler(user)
+				}, 1000)
+				return () => {
+					clearTimeout(timmer)
+				}
 			})
 			.catch(error => console.error(error))
 	}
