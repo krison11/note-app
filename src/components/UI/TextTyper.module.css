@@ -1,3 +1,7 @@
+.content {
+	text-align: left !important;
+}
+
 .cursor-wrapper {
 	display: inline-block;
 	height: 17px;

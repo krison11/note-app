@@ -1,7 +1,14 @@
 import classes from './TextTyper.module.css'
 import { useEffect, useState } from 'react'
+import { IoPencilOutline } from 'react-icons/io5'
 
-export default function TextTyper({ text, repeat, cursor, speed }) {
+export default function TextTyper({
+	text,
+	repeat,
+	cursor,
+	speedMilisec,
+	pauseMilisec,
+}) {
 	const [content, setContent] = useState('')
 	const [index, setIndex] = useState(0)
 	const [classname, setClassname] = useState('')
@@ -15,11 +22,11 @@ export default function TextTyper({ text, repeat, cursor, speed }) {
 				const char = text[content.length]
 				const wait = setTimeout(() => {
 					setContent(content + char)
-				}, speed)
+				}, speedMilisec)
 				return () => clearTimeout(wait)
 			}
 		}
-		pause(content.length * 60, true)
+		pause(content.length * pauseMilisec, true)
 	}
 
 	function clearText(text) {
@@ -48,6 +55,7 @@ export default function TextTyper({ text, repeat, cursor, speed }) {
 	}
 
 	useEffect(() => {
+		console.log('text type: ', typeof text)
 		if (Array.isArray(text)) {
 			if (repeat) {
 				if (typing) {
@@ -73,7 +81,7 @@ export default function TextTyper({ text, repeat, cursor, speed }) {
 	}, [content, typing, index])
 
 	return (
-		<div>
+		<div className={classes.content}>
 			{content}
 			<div className={classes['cursor-wrapper']}>
 				{cursor && <div className={classes[cursorClass]}>|</div>}

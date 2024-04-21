@@ -4,25 +4,84 @@ import Modal from '@/components/UI/Modal'
 import LoginForm from '@/components/Forms/LoginForm'
 import classes from '@/styles/Home.module.css'
 import { SlNote } from 'react-icons/sl'
+import TextTyper from '@/components/UI/TextTyper'
+import axios from 'axios'
+
+const TEXT = [
+	'Where ever you go there you are and whatever you do there you go',
+	'How are you?',
+	'Wellcome to my App',
+]
 
 export default function login() {
 	const userContext = useContext(UserContext)
+	const [greetingHasFinished, setGreetingHasFinished] = useState(false)
+	const [quote, setQuote] = useState({
+		author: '',
+		quote: '',
+	})
+
+	const [hideAuthor, setHideAuthor] = useState(true)
 
 	useEffect(() => {
 		document.body.style.backgroundColor = 'black'
 	}, [userContext.theme])
 
-	useEffect(() => {
-		document.body.style.backgroundColor = 'black'
-		if (!userContext.animationFinished) {
-			const timmer = setTimeout(() => {
-				userContext.animationFinishedHandler(true)
-			}, 4500)
-
-			return () => {
-				clearTimeout(timmer)
-			}
+	// dynamic delay for greeting content...
+	function calulateDelay(content) {
+		console.log(content.length)
+		let length = 0
+		if (Array.isArray(content)) {
+			content.forEach(text => {
+				length += text.length
+			})
+		} else {
+			length = content.length
 		}
+		return length * 210
+	}
+
+	async function quoteOfTheDay() {
+		await fetch('./api/get-quote')
+			.then(res => res.json())
+			.then(data => {
+				console.log(data.quote)
+				console.log(data.author)
+
+				setQuote({
+					quote: data.quote,
+					author: data.author,
+				})
+			})
+			.catch(err => {
+				console.log(err.message)
+			})
+	}
+
+	useEffect(() => {
+		quoteOfTheDay()
+		document.body.style.backgroundColor = 'black'
+		const millisec = calulateDelay(quote.author + quote.quote)
+		setTimeout(() => {
+			setHideAuthor(false)
+		}, 5000)
+		setTimeout(() => {
+			const greetingTimmer = setTimeout(() => {
+				setGreetingHasFinished(true)
+				if (!userContext.animationFinished) {
+					const timmer = setTimeout(() => {
+						userContext.animationFinishedHandler(true)
+					}, 4500)
+
+					return () => {
+						clearTimeout(timmer)
+					}
+				}
+			}, millisec)
+			return () => {
+				clearTimeout(greetingTimmer)
+			}
+		}, 10000)
 	}, [])
 
 	// login...
@@ -32,27 +91,55 @@ export default function login() {
 
 	return (
 		<>
-			{userContext.animationFinished ? (
-				<div className={classes.modalContainer}>
-					<Modal title={'Login'}>
-						<LoginForm onLogin={loginHandler} />
-					</Modal>
-				</div>
+			{greetingHasFinished ? (
+				<>
+					{userContext.animationFinished ? (
+						<div className={classes.modalContainer}>
+							<Modal title={'Login'}>
+								<LoginForm onLogin={loginHandler} />
+							</Modal>
+						</div>
+					) : (
+						<div className={classes.login}>
+							<div className={classes.contentContainer}>
+								<div className={classes.letterContainer}>
+									<span className={classes.one}>N</span>
+									<span className={classes.two}>o</span>
+									<span className={classes.three}>t</span>
+									<span className={classes.four}>e</span>
+									<span className={classes.five}>s</span>
+									<span className={classes.six}>.</span>
+								</div>
+								<div className={classes.iconBlock}>
+									<SlNote className={classes.icon} />
+								</div>
+							</div>
+						</div>
+					)}
+				</>
 			) : (
-				<div className={classes.login}>
-					<div className={classes.contentContainer}>
-						<div className={classes.letterContainer}>
-							<span className={classes.one}>N</span>
-							<span className={classes.two}>o</span>
-							<span className={classes.three}>t</span>
-							<span className={classes.four}>e</span>
-							<span className={classes.five}>s</span>
-							<span className={classes.six}>.</span>
-						</div>
-						<div className={classes.iconBlock}>
-							<SlNote className={classes.icon} />
-						</div>
+				<div className={classes.greetingContainer}>
+					<h1 className={classes.quoteHeader}>Quote of the day</h1>
+					<div className={classes.quoteContainer}>
+						<TextTyper
+							text={quote.quote}
+							speedMilisec={20}
+							pauseMilisec={150}
+							repeat={true}
+							cursor={hideAuthor}
+						/>
 					</div>
+					{!hideAuthor && (
+						<div className={classes.authorContainer}>
+							<TextTyper
+								text={quote.author}
+								speedMilisec={20}
+								pauseMilisec={1000}
+								repeat={true}
+								cursor={true}
+							/>
+						</div>
+					)}
 				</div>
 			)}
 		</>

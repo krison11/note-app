@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
@@ -70,7 +71,8 @@
 
 .login,
 .modalContainer,
-.contentContainer {
+.contentContainer,
+.greetingContainer {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -85,6 +87,38 @@
 
 .login {
 	background-color: #000000;
+}
+
+.pinyon-script-regular {
+	font-family: 'Pinyon Script', cursive !important;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.greetingContainer {
+	font-weight: 800;
+	font-size: x-large;
+	font-style: normal;
+	background-color: #000000;
+	color: aqua;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.quoteHeader {
+	position: absolute;
+	top: 5vh;
+}
+.quoteContainer {
+	position: absolute;
+	width: 50rem;
+	max-width: 90vw;
+}
+.authorContainer {
+	position: absolute;
+	bottom: 15vh;
+	margin-left: 45vw;
 }
 
 .contentContainer {
