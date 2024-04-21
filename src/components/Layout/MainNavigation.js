@@ -12,7 +12,7 @@ import { SlNote } from 'react-icons/sl'
 export default function MainNavigation() {
 	const userContext = useContext(UserContext)
 	const router = useRouter()
-	const [userName, setUserName] = useState('')
+	// const [userName, setUserName] = useState('')
 	// const [image, setImage] = useState('')
 
 	const notes = userContext.user.notes.length > 1 ? 'Notes' : 'Note'
@@ -29,8 +29,6 @@ export default function MainNavigation() {
 	// }
 
 	useEffect(() => {
-		const user = JSON.parse(sessionStorage.getItem('user'))
-		user && setUserName(user.username)
 		document.body.style.backgroundColor = userContext.bgColor
 	}, [])
 
@@ -38,10 +36,10 @@ export default function MainNavigation() {
 		document.body.style.backgroundColor = userContext.bgColor
 	}, [userContext.user.theme])
 
-	useEffect(() => {
-		const user = JSON.parse(sessionStorage.getItem('user'))
-		user && setUserName(user.username)
-	}, [userName])
+	// useEffect(() => {
+	// 	const user = JSON.parse(sessionStorage.getItem('user'))
+	// 	user && setUserName(user.username)
+	// }, [userContext.user])
 
 	// get image....
 	useEffect(() => {
@@ -84,7 +82,7 @@ export default function MainNavigation() {
 							className={`${router.pathname === '/user' ? classes.active : ''}`}
 							href={'/user'}
 						>
-							<p>{userName}</p>
+							<p>{userContext.user.username}</p>
 
 							{userContext.image ? (
 								<div className={classes.imagecontainer}>
@@ -97,7 +95,9 @@ export default function MainNavigation() {
 							) : (
 								<BiUserCircle className={classes.icons} />
 							)}
-							<span className={classes.usernameParagraph}>{userName}</span>
+							<span className={classes.usernameParagraph}>
+								{userContext.user.username}
+							</span>
 						</Link>
 					</li>
 				</ul>
