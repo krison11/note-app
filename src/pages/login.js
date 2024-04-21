@@ -14,10 +14,9 @@ export default function login() {
 
 	useEffect(() => {
 		document.body.style.backgroundColor = 'black'
-		if (!userContext.aimationFinished) {
+		if (!userContext.animationFinished) {
 			const timmer = setTimeout(() => {
 				userContext.animationFinishedHandler(true)
-				// sessionStorage.setItem('show-modal', true)
 			}, 4500)
 
 			return () => {
@@ -33,7 +32,7 @@ export default function login() {
 
 	return (
 		<>
-			{userContext.aimationFinished ? (
+			{userContext.animationFinished ? (
 				<div className={classes.modalContainer}>
 					<Modal title={'Login'}>
 						<LoginForm onLogin={loginHandler} />
