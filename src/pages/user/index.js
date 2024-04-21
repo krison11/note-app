@@ -53,7 +53,7 @@ export default function UserPage() {
 				sessionStorage.setItem('user', JSON.stringify(user))
 				const timmer = setTimeout(() => {
 					userContext.userHandler(user)
-				}, 1000)
+				}, 5000)
 				return () => {
 					clearTimeout(timmer)
 				}
