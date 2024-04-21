@@ -19,7 +19,7 @@ const UserContext = React.createContext({
 	textAreaBgColor: '',
 	image: '',
 	showNoteBtn: true,
-	aimationFinished: false,
+	animationFinished: false,
 	clearSearch: false,
 	userHandler: user => {},
 	clearSearchHandler: bool => {},
@@ -53,7 +53,7 @@ export const UserContextProvider = props => {
 		username: '',
 	})
 	const [image, setImage] = useState('')
-	const [aimationFinished, setAnimationFinished] = useState(false)
+	const [animationFinished, setAnimationFinished] = useState(false)
 	const [showNoteBtn, setShowNoteBtn] = useState(true)
 	const [clearSearch, setClearSearch] = useState(false)
 
@@ -182,7 +182,7 @@ export const UserContextProvider = props => {
 				textAreaBgColor,
 				image,
 				showNoteBtn,
-				aimationFinished,
+				animationFinished,
 				user,
 				clearSearch,
 				toggleTheme,
