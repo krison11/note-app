@@ -83,9 +83,7 @@ export default async function handler(req, res) {
 				})
 			}
 			if (requestData.from === 'logout') {
-				await database
-					.deleteOne({ _id: new ObjectId(requestData.user._id) })
-					.then()
+				await database.deleteOne({ _id: new ObjectId(requestData.user._id) })
 
 				delete requestData.user._id
 				await database.insertOne(requestData.user)

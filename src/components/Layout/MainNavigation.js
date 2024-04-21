@@ -20,11 +20,13 @@ export default function MainNavigation() {
 	// import image
 	async function getImage() {
 		const user = JSON.parse(sessionStorage.getItem('user'))
-		const imagePath = user.image
-			? await import(`/src/pages/api/images/${user.image}`)
-			: ''
-		console.log('imagePath: ', imagePath)
-		setImage(imagePath)
+		if (user) {
+			const imagePath = user.image
+				? await import(`/src/pages/api/images/${user.image}`)
+				: ''
+			console.log('imagePath: ', imagePath)
+			setImage(imagePath)
+		}
 	}
 
 	useEffect(() => {
