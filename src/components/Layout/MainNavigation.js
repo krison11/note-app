@@ -34,11 +34,6 @@ export default function MainNavigation() {
 		// const userImage = sessionStorage.getItem('image')
 		// setImage(userImage)
 		// getImage()
-	}, [userContext.user.username])
-
-	useEffect(() => {
-		// const userImage = sessionStorage.getItem('image')
-		// setImage(userImage)
 		const timmer = setTimeout(() => {
 			getImage()
 		}, 2000)
@@ -46,7 +41,19 @@ export default function MainNavigation() {
 		return () => {
 			clearTimeout(timmer)
 		}
-	}, [userContext.user.image])
+	}, [userContext.user])
+
+	// useEffect(() => {
+	// const userImage = sessionStorage.getItem('image')
+	// setImage(userImage)
+	// const timmer = setTimeout(() => {
+	// 	getImage()
+	// }, 2000)
+
+	// return () => {
+	// 	clearTimeout(timmer)
+	// }
+	// }, [userContext.user])
 
 	function toggleTheme() {
 		userContext.toggleTheme()
