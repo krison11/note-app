@@ -83,10 +83,17 @@ export default async function handler(req, res) {
 				})
 			}
 			if (requestData.from === 'logout') {
-				await database.deleteOne({ _id: new ObjectId(requestData.user._id) })
-
-				delete requestData.user._id
-				await database.insertOne(requestData.user)
+				await database.updateOne(
+					{ _id: new ObjectId(requestData.user._id) },
+					{
+						$set: {
+							password: requestData.user.password,
+							image: requestData.user.image,
+							theme: requestData.user.theme,
+							notes: requestData.user.notes,
+						},
+					}
+				)
 
 				res.status(201).json({
 					message: 'user updates have been stored succcessfully...',

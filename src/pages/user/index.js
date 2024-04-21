@@ -48,18 +48,9 @@ export default function UserPage() {
 			.then(res => res.json())
 			.then(res => {
 				console.log('image response: ', res)
-				// console.log('image file: ', res.file)
-				// console.log('image path: ', res.filePath)
-				// console.log('image name: ', res.fileName)
 				const user = JSON.parse(sessionStorage.getItem('user'))
 				user.image = res.fileName
 				sessionStorage.setItem('user', JSON.stringify(user))
-				// console.log('message: ', res.message)
-				// console.log('fileName: ', res.fileName)
-				// console.log('filePath: ', res.filePath)
-				// sessionStorage.setItem('image', data)
-				// userContext.imageHandler(data)
-				// userContext.imageHandler(res.filepath)
 			})
 			.catch(error => console.error(error))
 	}
