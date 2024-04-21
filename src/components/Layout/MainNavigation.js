@@ -24,7 +24,6 @@ export default function MainNavigation() {
 			const imagePath = user.image
 				? await import(`/src/pages/api/images/${user.image}`)
 				: ''
-			console.log('imagePath: ', imagePath)
 			setImage(imagePath)
 		}
 	}
@@ -34,14 +33,20 @@ export default function MainNavigation() {
 		user && setUserName(user.username)
 		// const userImage = sessionStorage.getItem('image')
 		// setImage(userImage)
-		getImage()
-	}, [userContext.user])
+		// getImage()
+	}, [userContext.user.username])
 
 	useEffect(() => {
 		// const userImage = sessionStorage.getItem('image')
 		// setImage(userImage)
-		getImage()
-	}, [userContext.image])
+		const timmer = setTimeout(() => {
+			getImage()
+		}, 2000)
+
+		return () => {
+			clearTimeout(timmer)
+		}
+	}, [userContext.user.image])
 
 	function toggleTheme() {
 		userContext.toggleTheme()

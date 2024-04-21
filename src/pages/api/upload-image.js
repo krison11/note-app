@@ -57,6 +57,7 @@ export default async function handler(req, res) {
 
 	console.log('user id: ', data.fields.userId[0])
 	console.log('new file name: ', data.files.file[0].newFilename)
+	console.log('file: ', data.files.file[0].filepath)
 
 	await database.updateOne(
 		{ _id: new ObjectId(data.fields.userId[0]) },
@@ -65,6 +66,7 @@ export default async function handler(req, res) {
 	res.status(200).json({
 		message: 'image added succcessfully...',
 		fileName: data.files.file[0].newFilename,
+		filePath: data.files.file[0].filepath,
 	})
 
 	client.close()

@@ -59,8 +59,11 @@ export const UserContextProvider = props => {
 
 	useEffect(() => {
 		const storedUser = JSON.parse(sessionStorage.getItem('user'))
-		!storedUser && router.push('/login')
-		!user.theme && themeHandler(user.theme)
+		if (storedUser) {
+			!user.theme && themeHandler(storedUser.theme)
+		} else {
+			router.push('/login')
+		}
 	}, [user])
 
 	async function loginHandler(data) {

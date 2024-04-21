@@ -50,6 +50,7 @@ export default function UserPage() {
 				console.log('image response: ', res)
 				const user = JSON.parse(sessionStorage.getItem('user'))
 				user.image = res.fileName
+				userContext.userHandler(user)
 				sessionStorage.setItem('user', JSON.stringify(user))
 			})
 			.catch(error => console.error(error))
