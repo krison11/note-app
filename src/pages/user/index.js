@@ -40,7 +40,6 @@ export default function UserPage() {
 	}
 
 	async function addImageHandler(data) {
-		console.log('data before: ', data)
 		await fetch('../api/upload-image', {
 			method: 'POST',
 			body: data,
@@ -53,7 +52,7 @@ export default function UserPage() {
 				sessionStorage.setItem('user', JSON.stringify(user))
 				const timmer = setTimeout(() => {
 					userContext.userHandler(user)
-				}, 5000)
+				}, 2000)
 				return () => {
 					clearTimeout(timmer)
 				}

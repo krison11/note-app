@@ -13,45 +13,47 @@ export default function MainNavigation() {
 	const userContext = useContext(UserContext)
 	const router = useRouter()
 	const [userName, setUserName] = useState('')
-	const [image, setImage] = useState('')
+	// const [image, setImage] = useState('')
 
 	const notes = userContext.user.notes.length > 1 ? 'Notes' : 'Note'
 
 	// import image
-	async function getImage() {
-		const user = JSON.parse(sessionStorage.getItem('user'))
-		if (user) {
-			const imagePath = user.image
-				? await import(`/src/pages/api/images/${user.image}`)
-				: ''
-			setImage(imagePath)
-		}
-	}
+	// async function getImage() {
+	// 	const user = JSON.parse(sessionStorage.getItem('user'))
+	// 	if (user) {
+	// 		const imagePath = user.image
+	// 			? await import(`/src/pages/api/images/${user.image}`)
+	// 			: ''
+	// 		setImage(imagePath)
+	// 	}
+	// }
 
 	useEffect(() => {
 		const user = JSON.parse(sessionStorage.getItem('user'))
 		user && setUserName(user.username)
-		// const userImage = sessionStorage.getItem('image')
-		// setImage(userImage)
-		// getImage()
-		// getImage()
-	}, [userContext.user])
-
-	// get image....
-	useEffect(() => {
-		getImage()
-	}, [userContext.user.image])
-
-	function toggleTheme() {
-		userContext.toggleTheme()
-	}
-	useEffect(() => {
 		document.body.style.backgroundColor = userContext.bgColor
 	}, [])
 
 	useEffect(() => {
 		document.body.style.backgroundColor = userContext.bgColor
 	}, [userContext.user.theme])
+
+	useEffect(() => {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		user && setUserName(user.username)
+	}, [userName])
+
+	// get image....
+	useEffect(() => {
+		const userImage = sessionStorage.getItem('image')
+		userContext.imageHandler(userImage)
+		// setImage(userImage)
+		// getImage()
+	}, [userContext.user.image])
+
+	function toggleTheme() {
+		userContext.toggleTheme()
+	}
 
 	return (
 		<header>
@@ -84,9 +86,13 @@ export default function MainNavigation() {
 						>
 							<p>{userName}</p>
 
-							{image ? (
+							{userContext.image ? (
 								<div className={classes.imagecontainer}>
-									<Image src={image} alt='Image selected by user.' fill />
+									<Image
+										src={userContext.image}
+										alt='Image selected by user.'
+										fill
+									/>
 								</div>
 							) : (
 								<BiUserCircle className={classes.icons} />

@@ -64,11 +64,11 @@ export default function User({ onAddImage, onLogout }) {
 		const dataUrlReader = new FileReader()
 		dataUrlReader.onload = () => {
 			setImage(dataUrlReader.result)
-			console.log('loaded file: ', dataUrlReader.result)
+			// console.log('loaded file: ', dataUrlReader.result)
 		}
 		dataUrlReader.readAsDataURL(loadedFile)
 
-		console.log('loaded file: ', loadedFile)
+		// console.log('loaded file: ', loadedFile)
 
 		const user = JSON.parse(sessionStorage.getItem('user'))
 		// setting formData()...

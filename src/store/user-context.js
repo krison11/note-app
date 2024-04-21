@@ -171,6 +171,7 @@ export const UserContextProvider = props => {
 	function logoutHandler() {
 		sessionStorage.clear()
 		setFormInputIsValid(true)
+		setImage('')
 		router.push('/login')
 	}
 
