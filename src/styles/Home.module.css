@@ -112,13 +112,13 @@
 }
 .quoteContainer {
 	position: absolute;
-	width: 50rem;
+	width: fit-content;
 	max-width: 90vw;
+	margin-bottom: 15vh;
 }
 .authorContainer {
 	position: absolute;
-	bottom: 15vh;
-	margin-left: 45vw;
+	bottom: 30vh;
 }
 
 .contentContainer {
