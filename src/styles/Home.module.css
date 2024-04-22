@@ -112,7 +112,7 @@
 }
 .quoteContainer {
 	position: absolute;
-	width: 30rem;
+	width: fit-content;
 	height: 40vh;
 	max-width: 90vw;
 }
