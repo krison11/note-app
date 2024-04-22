@@ -55,7 +55,7 @@ export default function DeleteAccount({ onDeleteUser }) {
 					/>
 				</div>
 				<div className={classes.btn}>
-					<Button color='#ee3874' type='submit'>
+					<Button color='#fe0000' type='submit'>
 						Delete account
 					</Button>
 				</div>
