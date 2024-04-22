@@ -115,7 +115,7 @@ export default function LoginForm(props) {
 				</div>
 			</form>
 			<div className={classes.btn}>
-				<Button color='#160c20' onClick={registerHandler}>
+				<Button color='#545e6b' onClick={registerHandler}>
 					Register
 				</Button>
 			</div>

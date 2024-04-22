@@ -12,7 +12,7 @@ export default function Todos({ notes, onDelete, searching }) {
 	const messageClassName = searching ? 'not-found' : 'no-notes'
 	useEffect(() => {
 		if (searching) {
-			setMessage('Nothing found!')
+			setMessage('Nothing found...')
 		} else {
 			const timer = setTimeout(() => {
 				setMessage(`Wellcome ${context.user.username}  add your first note... `)

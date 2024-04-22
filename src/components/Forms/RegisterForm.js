@@ -176,7 +176,7 @@ export default function RegisterForm(props) {
 					</div>
 				</div>
 				<div className={classes.btn}>
-					<Button color='#160c20' type='submit'>
+					<Button color='#545e6b' type='submit'>
 						Register
 					</Button>
 				</div>
