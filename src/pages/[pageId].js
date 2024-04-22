@@ -13,6 +13,8 @@ export default function pages() {
 	)[0]
 
 	useEffect(() => {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		!user && router.push('/login')
 		document.body.style.backgroundColor = userConext.bgColor
 		document.body.style.color = userConext.color
 		userConext.showNoteBtnHandler(true)

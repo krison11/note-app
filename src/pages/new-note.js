@@ -9,6 +9,8 @@ export default function NewTodoPage() {
 	const userConext = useContext(UserContext)
 
 	useEffect(() => {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		!user && router.push('/login')
 		document.body.style.backgroundColor = userConext.bgColor
 		document.body.style.color = userConext.color
 	}, [])

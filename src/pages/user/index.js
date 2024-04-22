@@ -7,6 +7,8 @@ export default function UserPage() {
 	const userContext = useContext(UserContext)
 
 	useEffect(() => {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		!user && router.push('/login')
 		document.body.style.backgroundColor = userContext.bgColor
 	}, [])
 

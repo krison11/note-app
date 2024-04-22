@@ -12,6 +12,8 @@ export default function DeleteAccountPage() {
 	const [show, setShow] = useState(false)
 
 	useEffect(() => {
+		const user = JSON.parse(sessionStorage.getItem('user'))
+		!user && router.push('/login')
 		document.body.style.backgroundColor = 'black'
 	}, [])
 
