@@ -2,7 +2,6 @@ import classes from './Notes.module.css'
 import Note from './Note'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '@/store/user-context'
-import { IoPencilOutline } from 'react-icons/io5'
 
 export default function Todos({ notes, onDelete, searching }) {
 	const [message, setMessage] = useState('')
@@ -13,11 +12,9 @@ export default function Todos({ notes, onDelete, searching }) {
 	useEffect(() => {
 		if (searching) {
 			setMessage('Nothing found...')
-			setPen()
 		} else {
 			const timer = setTimeout(() => {
 				setMessage(`Wellcome ${context.user.username}  add your first note... `)
-				setPen(<IoPencilOutline />)
 			}, 1500)
 
 			return () => {
@@ -34,10 +31,7 @@ export default function Todos({ notes, onDelete, searching }) {
 		<div className={classes.container}>
 			{notes.length === 0 ? (
 				<div className={classes['empty-div']}>
-					<p className={classes[messageClassName]}>
-						{message}
-						{pen}
-					</p>
+					<p className={classes[messageClassName]}>{message}</p>
 				</div>
 			) : (
 				notes.map(note => {
