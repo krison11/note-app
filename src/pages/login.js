@@ -57,9 +57,17 @@ export default function login() {
 		const greetingEnded = sessionStorage.getItem('greetingEnded')
 		if (greetingEnded) {
 			setGreetingHasFinished(true)
+			if (!userContext.animationFinished) {
+				const timmer = setTimeout(() => {
+					userContext.animationFinishedHandler(true)
+				}, 4500)
+
+				return () => {
+					clearTimeout(timmer)
+				}
+			}
 		} else {
 			quoteOfTheDay()
-			setGreetingHasFinished(false)
 			const authorTimmer = setTimeout(() => {
 				setHideAuthor(false)
 			}, 5000)
