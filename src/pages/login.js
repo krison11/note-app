@@ -126,7 +126,7 @@ export default function login() {
 				</>
 			) : (
 				<div className={classes.greetingContainer}>
-					<h1 className={classes.quoteHeader}>Quote of the day</h1>
+					<h2 className={classes.quoteHeader}>Quote of the day</h2>
 					<div className={classes.quoteContainer}>
 						<TextTyper
 							text={quote.quote}
