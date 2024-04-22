@@ -5,13 +5,6 @@ import LoginForm from '@/components/Forms/LoginForm'
 import classes from '@/styles/Home.module.css'
 import { SlNote } from 'react-icons/sl'
 import TextTyper from '@/components/UI/TextTyper'
-import axios from 'axios'
-
-const TEXT = [
-	'Where ever you go there you are and whatever you do there you go',
-	'How are you?',
-	'Wellcome to my App',
-]
 
 export default function login() {
 	const userContext = useContext(UserContext)

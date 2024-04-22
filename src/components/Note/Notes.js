@@ -6,7 +6,7 @@ import { IoPencilOutline } from 'react-icons/io5'
 
 export default function Todos({ notes, onDelete, searching }) {
 	const [message, setMessage] = useState('')
-	const [pen, setPen] = useState('')
+	const [pen, setPen] = useState()
 	const context = useContext(UserContext)
 
 	const messageClassName = searching ? 'not-found' : 'no-notes'
