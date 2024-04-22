@@ -5,6 +5,7 @@ import LoginForm from '@/components/Forms/LoginForm'
 import classes from '@/styles/Home.module.css'
 import { SlNote } from 'react-icons/sl'
 import TextTyper from '@/components/UI/TextTyper'
+import { eslint } from '../../next.config'
 
 export default function login() {
 	const userContext = useContext(UserContext)
@@ -21,18 +22,18 @@ export default function login() {
 	}, [userContext.theme])
 
 	// dynamic delay for greeting content...
-	function calulateDelay(content) {
-		console.log(content.length)
-		let length = 0
-		if (Array.isArray(content)) {
-			content.forEach(text => {
-				length += text.length
-			})
-		} else {
-			length = content.length
-		}
-		return length * 210
-	}
+	// function calulateDelay(content) {
+	// 	console.log(content.length)
+	// 	let length = 0
+	// 	if (Array.isArray(content)) {
+	// 		content.forEach(text => {
+	// 			length += text.length
+	// 		})
+	// 	} else {
+	// 		length = content.length
+	// 	}
+	// 	return length * 1000
+	// }
 
 	async function quoteOfTheDay() {
 		await fetch('./api/get-quote')
@@ -52,15 +53,19 @@ export default function login() {
 	}
 
 	useEffect(() => {
-		quoteOfTheDay()
 		document.body.style.backgroundColor = 'black'
-		const millisec = calulateDelay(quote.author + quote.quote)
-		setTimeout(() => {
-			setHideAuthor(false)
-		}, 5000)
-		setTimeout(() => {
+		const greetingEnded = sessionStorage.getItem('greetingEnded')
+		if (greetingEnded) {
+			setGreetingHasFinished(true)
+		} else {
+			quoteOfTheDay()
+			setGreetingHasFinished(false)
+			const authorTimmer = setTimeout(() => {
+				setHideAuthor(false)
+			}, 5000)
 			const greetingTimmer = setTimeout(() => {
 				setGreetingHasFinished(true)
+				sessionStorage.setItem('greetingEnded', true)
 				if (!userContext.animationFinished) {
 					const timmer = setTimeout(() => {
 						userContext.animationFinishedHandler(true)
@@ -70,11 +75,12 @@ export default function login() {
 						clearTimeout(timmer)
 					}
 				}
-			}, millisec)
+			}, 10000)
 			return () => {
 				clearTimeout(greetingTimmer)
+				clearTimeout(authorTimmer)
 			}
-		}, 10000)
+		}
 	}, [])
 
 	// login...

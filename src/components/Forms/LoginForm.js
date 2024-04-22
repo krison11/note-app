@@ -109,7 +109,7 @@ export default function LoginForm(props) {
 					/>
 				</div>
 				<div className={classes.btn}>
-					<Button color='#ff006f' type='submit'>
+					<Button color='#2196f3' type='submit'>
 						Login
 					</Button>
 				</div>

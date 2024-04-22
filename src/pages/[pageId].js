@@ -7,13 +7,11 @@ import UserContext from '@/store/user-context'
 export default function pages() {
 	const userConext = useContext(UserContext)
 	const router = useRouter()
-	const [note, setNote] = useState()
+	// const [note, setNote] = useState()
 
-	useEffect(() => {
-		const user = JSON.parse(sessionStorage.getItem('user'))
-		const note = user.notes.filter(note => note.id === router.query.pageId)[0]
-		setNote(note)
-	}, [userConext.user])
+	const note = userConext.user.notes.filter(
+		note => note.id === router.query.pageId
+	)[0]
 
 	useEffect(() => {
 		document.body.style.backgroundColor = userConext.bgColor
@@ -24,7 +22,7 @@ export default function pages() {
 	useEffect(() => {
 		document.body.style.backgroundColor = userConext.bgColor
 		document.body.style.color = userConext.color
-	}, [userConext.theme])
+	}, [userConext.user.theme])
 
 	useEffect(() => {
 		const pageId = String(router.query.pageId)
