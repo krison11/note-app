@@ -9,7 +9,7 @@ export default function Todos({ notes, onDelete, searching }) {
 	const messageClassName = searching ? 'not-found' : 'no-notes'
 	const message = searching
 		? 'Nothing found!'
-		: `Wellcome ${context.user.username} add you frist note...`
+		: `Wellcome ${context.user.username} add your first note...`
 
 	function deleteHandler(noteId) {
 		onDelete(noteId)
