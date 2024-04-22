@@ -1,27 +1,15 @@
 import classes from './Notes.module.css'
 import Note from './Note'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import UserContext from '@/store/user-context'
 
 export default function Todos({ notes, onDelete, searching }) {
-	const [message, setMessage] = useState('')
-	const [pen, setPen] = useState()
 	const context = useContext(UserContext)
 
 	const messageClassName = searching ? 'not-found' : 'no-notes'
-	useEffect(() => {
-		if (searching) {
-			setMessage('Nothing found...')
-		} else {
-			const timer = setTimeout(() => {
-				setMessage(`Wellcome ${context.user.username}  add your first note... `)
-			}, 1500)
-
-			return () => {
-				clearTimeout(timer)
-			}
-		}
-	}, [searching])
+	const message = searching
+		? 'Nothing found!'
+		: `Wellcome ${context.user.username} add you frist note...`
 
 	function deleteHandler(noteId) {
 		onDelete(noteId)

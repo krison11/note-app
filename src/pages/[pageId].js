@@ -7,7 +7,6 @@ import UserContext from '@/store/user-context'
 export default function pages() {
 	const userConext = useContext(UserContext)
 	const router = useRouter()
-	// const [note, setNote] = useState()
 
 	const note = userConext.user.notes.filter(
 		note => note.id === router.query.pageId
