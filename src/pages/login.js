@@ -5,7 +5,6 @@ import LoginForm from '@/components/Forms/LoginForm'
 import classes from '@/styles/Home.module.css'
 import { SlNote } from 'react-icons/sl'
 import TextTyper from '@/components/UI/TextTyper'
-import { eslint } from '../../next.config'
 
 export default function login() {
 	const userContext = useContext(UserContext)
@@ -39,9 +38,6 @@ export default function login() {
 		await fetch('./api/get-quote')
 			.then(res => res.json())
 			.then(data => {
-				console.log(data.quote)
-				console.log(data.author)
-
 				setQuote({
 					quote: data.quote,
 					author: data.author,

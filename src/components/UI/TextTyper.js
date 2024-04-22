@@ -55,7 +55,6 @@ export default function TextTyper({
 	}
 
 	useEffect(() => {
-		console.log('text type: ', typeof text)
 		if (Array.isArray(text)) {
 			if (repeat) {
 				if (typing) {

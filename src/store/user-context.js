@@ -81,7 +81,6 @@ export const UserContextProvider = props => {
 				if (res.message === 'success') {
 					sessionStorage.setItem('user', JSON.stringify(res.user))
 					setUser(res.user)
-					console.log('res.user:', res.user)
 					// setImage(res.user.image)
 					// sessionStorage.setItem('image', res.user.image)
 					sessionStorage.removeItem('attemptedEmail')
