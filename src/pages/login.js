@@ -117,7 +117,7 @@ export default function login() {
 						<TextTyper
 							text={quote.quote}
 							speedMilisec={20}
-							pauseMilisec={150}
+							pauseMilisec={500}
 							repeat={true}
 							cursor={hideAuthor}
 						/>
@@ -127,7 +127,7 @@ export default function login() {
 							<TextTyper
 								text={quote.author}
 								speedMilisec={20}
-								pauseMilisec={1000}
+								pauseMilisec={2000}
 								repeat={true}
 								cursor={true}
 							/>
